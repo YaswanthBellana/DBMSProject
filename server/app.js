@@ -64,7 +64,7 @@ app.get("/", async (request, response) => {
   }
 });
 
-app.get("/:transport", async (request, response) => {
+app.post("/:transport", async (request, response) => {
   const transport = request.params.transport;
   const { from, to } = request.query;
   console.log(transport, from, to);

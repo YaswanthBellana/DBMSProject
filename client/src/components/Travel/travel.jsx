@@ -17,9 +17,15 @@ const Travel = () => {
 
   const fetchData = async () => {
     if (fromPlace && toPlace) {
-      let url = `http://localhost:3000/${selectedTransport}?from=${fromPlace}&to=${toPlace}`;
+      let url = `http://localhost:4000/${selectedTransport}?from=${fromPlace}&to=${toPlace}`;
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // body: JSON.stringify({}),
+        });
         const data = await response.json();
         setResults(data);
       } catch (error) {
@@ -45,9 +51,9 @@ const Travel = () => {
   } else if (selectedTransport === "trains") {
     places = ['Adipur', 'Agra Cantt', 'Agra Fort', 'Anjar', 'Asansol', 'Ballari', 'Barakar', 'Bardhaman', 'Baruipur', 'Bengaluru', 'Bhuj', 
     'Canning', 'Chamarajapuram', 'Chennai', 'Delhi', 'Durgapur', 'Durgapura', 'Gandhinagar', 'Harpalpur', 'Hospete', 'Howrah', 
-    'Hyderabad', 'Idgah Agra', 'Indore', 'Jaipur', 'Jaipur', 'Jaipur', 'Jaipur Junction', 'Karmali', 'Khaj', 'Khajuraho', 'Kochuveli', 
+    'Hyderabad', 'Idgah Agra', 'Indore', 'Jaipur', 'Jaipur Junction', 'Karmali', 'Khaj', 'Khajuraho', 'Kochuveli', 
     'Krishnanagar', 'Krishnarajasagara', 'Kurseong', 'Mahoba', 'Manduadih', 'Mughal Sarai', 'Mumbai', 'Mysore Junction', 'New Jalpaiguri',
-    'Ranaghat', 'Sealdah', 'Sealdah', 'Shalimar', 'Shantipur', 'Siliguri', 'Sonarpur', 'Thivim', 'Toranagallu', 'Trivandrum Central', 
+    'Ranaghat', 'Sealdah', 'Shalimar', 'Shantipur', 'Siliguri', 'Sonarpur', 'Thivim', 'Toranagallu', 'Trivandrum Central', 
     'Varanasi Junction', 'Vasco da Gama', 'Veli', 'Visakhapatnam'];
   }
 
