@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import "./login.css";
 import { Link } from "react-router-dom";
 
@@ -7,7 +7,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const history = useNavigate();
   
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,15 +18,22 @@ const Login = () => {
         },
         body: JSON.stringify({ email, password, name }),
       });
-      const data = await response.json();
+      const d = await response.json();
+      const data = d.token;
       console.log(data);
-      if (response.ok) {
-        history.push("/home");
+      if (!isNaN(d.status === 200)) {
+        Cookies.set("jwt_token",data,{expires:1})
+      } else {
+        alert(data.error);
       }
     } catch (error) {
       console.error("Error submitting login data:", error);
     }
   };
+
+  // if(Cookies.get("jwt_token")){
+  //   return <Navigate to="/"/>
+  // }
   
   return (
     <div className="custom-login-container">
@@ -35,7 +41,7 @@ const Login = () => {
         <h2>Welcome to PlanYourTrip</h2>
         <p>Explore the beauty of the earth with us!</p>
         <form onSubmit={handleSubmit}>
-        <div className="custom-inputField">
+          <div className="custom-inputField">
             <input
               type="text"
               placeholder="Name"
