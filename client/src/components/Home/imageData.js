@@ -25,7 +25,7 @@ const Images = {
     "Cabo De Rama Fort": "/src/assets/Cabo De Rama Fort.jpeg",
     "Somnathpur Temple": "/src/assets/Somnathpur Temple.jpeg",
     "Sri Chamundeswari Temple": "/src/assets/Sri Chamundeswari Temple.jpg",
-    "Mysore Sand Sculpural Museum": "/src/assets/Mysore Sand Sculpural Museum.cms",
+    "Mysore Sand Sculpural Museum": "/src/assets/Mysore Sand Sculptures.jpeg",
     "Padmanabhaswamy Temple": "/src/assets/Padmanabhaswamy Temple.cms",
     "Kovalam Beach": "/src/assets/Kovalam Beach.jpg",
     "Priyadarshini Planetorium": "/src/assets/Priyadarshini Planetarium.jpg",
