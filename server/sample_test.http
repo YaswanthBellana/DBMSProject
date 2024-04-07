@@ -54,3 +54,8 @@ GET http://localhost:4000/flights?from=Kolkata&to=Delhi
 Content-Type: application/json
 
 ###
+###
+
+GET http://localhost:4000/lists
+
+###

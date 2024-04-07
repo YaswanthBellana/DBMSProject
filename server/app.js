@@ -90,17 +90,16 @@ app.get("/:transport", async (request, response) => {
   }
 });
 
-// app.get("/lists", async (request, response) => {
-//   const query1 = `SELECT departure, destination FROM trains;`;
-//   db.all(query1, (error, results) => {
-//     if (error) {
-//       console.error("Error fetching data:", error);
-//       return response.status(500).json({ error: "Internal Server Error" });
-//     }
-//     response.json(results);
-
-//   });
-// });
+app.get("/lists", async (request, response) => {
+  const query = `SELECT departure, destination FROM trains;`;
+  db.all(query, (error, results) => {
+    if (error) {
+      console.error("Error fetching data:", error);
+      return response.status(500).json({ error: "Internal Server Error" });
+    }
+    response.json(results);
+  });
+});
 
 app.post("/login", async (request, response) => {
   const { name, email, password } = request.body;
