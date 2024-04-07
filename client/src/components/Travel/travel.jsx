@@ -39,9 +39,16 @@ const Travel = () => {
   };
 
   if (selectedTransport === "flights") {
-    places = ["New York", "London", "Paris", "Tokyo", "Kolkata", "Delhi"];
+    places = ['Bagdogra', 'Bengaluru', 'Bhuj', 'Chennai', 'Delhi', 'Goa', 'Hubli', 'Hyderabad', 'Indore', 'Jaipur', 
+    'Khajuraho', 'Kolkata', 'Mumbai', 'Trivandrum', 'Varanasi', 'Vizag'];
+
   } else if (selectedTransport === "trains") {
-    places = ["Delhi", "Lucknow", "Pittapuram", "Tahh", "Susi", "hgg"];
+    places = ['Adipur', 'Agra Cantt', 'Agra Fort', 'Anjar', 'Asansol', 'Ballari', 'Barakar', 'Bardhaman', 'Baruipur', 'Bengaluru', 'Bhuj', 
+    'Canning', 'Chamarajapuram', 'Chennai', 'Delhi', 'Durgapur', 'Durgapura', 'Gandhinagar', 'Harpalpur', 'Hospete', 'Howrah', 
+    'Hyderabad', 'Idgah Agra', 'Indore', 'Jaipur', 'Jaipur', 'Jaipur', 'Jaipur Junction', 'Karmali', 'Khaj', 'Khajuraho', 'Kochuveli', 
+    'Krishnanagar', 'Krishnarajasagara', 'Kurseong', 'Mahoba', 'Manduadih', 'Mughal Sarai', 'Mumbai', 'Mysore Junction', 'New Jalpaiguri',
+    'Ranaghat', 'Sealdah', 'Sealdah', 'Shalimar', 'Shantipur', 'Siliguri', 'Sonarpur', 'Thivim', 'Toranagallu', 'Trivandrum Central', 
+    'Varanasi Junction', 'Vasco da Gama', 'Veli', 'Visakhapatnam'];
   }
 
   return (

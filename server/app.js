@@ -18,6 +18,7 @@ app.use(cors());
 app.get("/", async (request, response) => {
   try {
     const query = `SELECT * FROM places;`;
+    console.log("Ckeck the home page");
     const places = await new Promise((resolve, reject) => {
       db.all(query, (error, results) => {
         if (error) {
@@ -66,7 +67,7 @@ app.get("/", async (request, response) => {
 app.get("/:transport", async (request, response) => {
   const transport = request.params.transport;
   const { from, to } = request.query;
-  console.log("dbirviri");
+  console.log(transport, from, to);
   if (!from || !to) {
     return response
       .status(400)
