@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./login.css";
 import { Link } from "react-router-dom";
 
@@ -7,7 +7,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  
+  const Navigate = useNavigate("");
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -22,7 +23,7 @@ const Login = () => {
       const data = d.token;
       console.log(data);
       if (!isNaN(d.status === 200)) {
-        Cookies.set("jwt_token",data,{expires:1})
+        localStorage.setItem("jwt_token", data)
       } else {
         alert(data.error);
       }
@@ -31,9 +32,9 @@ const Login = () => {
     }
   };
 
-  // if(Cookies.get("jwt_token")){
-  //   return <Navigate to="/"/>
-  // }
+  if(localStorage.getItem("jwt_token") == undefined){
+    return <Navigate to="/"/>
+  }
   
   return (
     <div className="custom-login-container">
