@@ -1,0 +1,50 @@
+.reviewContainer {
+  width: 100vw;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.lastButtons {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+.reviewButton {
+  margin-left: 10px; 
+  width: 120px;
+  height: 60px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 0;
+  background-color: black;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.dropdownContainer {
+  width: 400px;
+  padding: 20px;
+}
+.Reviewlabel {
+  display: block;
+  margin-bottom: 5px;
+}
+.reviewSelect {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 16px;
+}
+.reviewSelect:hover,
+.reviewSelect:focus {
+  border-color: #999;
+}
+.content{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-bottom: 20px;
+}

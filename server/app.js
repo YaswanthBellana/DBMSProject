@@ -203,7 +203,30 @@ app.post("/fg", async (request, response) => {
   });
 });
 
-app.get("/reviewPlace", async (request, response) => {});
+app.post("/reviewPlace", async (request, response) => {
+  try {
+    const { selectedPlace, selectedSort } = request.body;
+    
+    // Modify your SQL query accordingly based on selectedPlace and selectedSort
+    const query = `SELECT r.review, r.rating, u.name, p.place_name
+    FROM reviews as r INNER JOIN users as u INNER JOIN places as p
+    WHERE (r.user_id = u.user_id) AND (p.place_id = r.place_id)
+    AND p.place_name = ? ORDER BY r.rating ${selectedSort};`;
+
+    db.all(query, [selectedPlace], (err, rows) => {
+      if (err) {
+        console.error("Error executing query:", err);
+        return response.status(500).json({ error: "Internal Server Error" });
+      }
+      console.log("-------------");
+      response.send({ reviews: rows });
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    response.status(500).json({ error });
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
