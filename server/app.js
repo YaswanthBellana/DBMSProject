@@ -93,7 +93,7 @@ app.get("/:transport", async (request, response) => {
 
 app.post("/login", async (request, response) => {
   const { name, email, password } = request.body;
-  
+
   if (!name || !email || !password) {
     return response
       .status(400)
@@ -117,7 +117,7 @@ app.post("/login", async (request, response) => {
     }
     const token = row.user_id;
     console.log(token);
-    response.json({ token });
+    response.send({ token });
   });
 });
 
