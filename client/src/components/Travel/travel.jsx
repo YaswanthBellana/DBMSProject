@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Navbar from "/src/components/Navbar/navbar.jsx";
 import Footer from "/src/components/Footer/footer.jsx";
 import "./travel.css";
+import flight from './flight.js'
 import { IoSearchSharp } from "react-icons/io5";
 
 const Travel = () => {
@@ -130,13 +131,17 @@ const Travel = () => {
         <div className="resultsdisplay">
           {results.map((result, index) => (
             <div key={index} className="eachOne">
-              <p className="p">{result.name}</p>
+              {
+                selectedTransport === "trains" ? (
+                <p className="p">{result.name}</p> ) :
+                (<img src={flight[result.type]} className="ii" alt={result.type} />)
+              }
               <div className="subContainerResult">
                 <p className="p paratt1">{result.type}</p>
-                <p className="p paratt2">{result.trainNumber}</p>
+                <p className="p paratt2">{result.number}</p>
               </div>
-              <p className="p">{result.from}</p>
-              <p className="p">{result.to}</p>
+              <p className="p">{result.departure}</p>
+              <p className="p">{result.destination}</p>
               <p className="p">{result.time}</p>
             </div>
           ))}

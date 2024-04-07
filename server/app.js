@@ -85,6 +85,7 @@ app.post("/:transport", async (request, response) => {
         return response.status(500).json({ error: "Internal Server Error" });
       }
       response.json(results);
+      console.log(results);    
     });
   } catch (error) {
     console.error("Error fetching data:", error);
