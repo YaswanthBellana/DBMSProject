@@ -7,7 +7,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const Navigate = useNavigate("");
+  const Navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,6 +24,7 @@ const Login = () => {
       console.log(data);
       if (!isNaN(d.status === 200)) {
         localStorage.setItem("jwt_token", data)
+        Navigate("/")
       } else {
         alert(data.error);
       }
@@ -32,8 +33,8 @@ const Login = () => {
     }
   };
 
-  if(localStorage.getItem("jwt_token") == undefined){
-    return <Navigate to="/"/>
+  if(localStorage.getItem("jwt_token")){
+    Navigate("/")
   }
   
   return (

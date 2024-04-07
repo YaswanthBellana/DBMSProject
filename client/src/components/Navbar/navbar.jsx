@@ -39,7 +39,7 @@ const Navbar = () => {
 
   const logout = () => {
     setMenuOpen(false);
-    Cookies.remove("jwt_token");
+    localStorage.removeItem("jwt_token");
   };
 
   return (
@@ -76,8 +76,8 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li>
-          {Cookies.get("jwt_token") ? (
-            <NavLink to="/logout" onClick={logout}>
+          {localStorage.getItem("jwt_token") ? (
+            <NavLink to="/login" onClick={logout}>
               Logout
             </NavLink>
           ) : (
