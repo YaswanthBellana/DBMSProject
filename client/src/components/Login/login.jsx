@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./login.css"; // Changed import for CSS file
+import "./login.css";
 import { Link } from "react-router-dom";
 
-const Login = () => { // Changed component name to CustomLogin
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const history = useNavigate(); // Initialize useNavigate hook
-
+  const [name, setName] = useState("");
+  const history = useNavigate();
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -16,7 +17,7 @@ const Login = () => { // Changed component name to CustomLogin
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, name }),
       });
       const data = await response.json();
       console.log(data);
@@ -27,14 +28,23 @@ const Login = () => { // Changed component name to CustomLogin
       console.error("Error submitting login data:", error);
     }
   };
-
+  
   return (
-    <div className="custom-login-container"> {/* Changed className */}
-      <div className="custom-login-form"> {/* Changed className */}
+    <div className="custom-login-container">
+      <div className="custom-login-form">
         <h2>Welcome to PlanYourTrip</h2>
         <p>Explore the beauty of the earth with us!</p>
         <form onSubmit={handleSubmit}>
-          <div className="custom-inputField"> {/* Changed className */}
+        <div className="custom-inputField">
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="custom-inputField">
             <input
               type="email"
               placeholder="Email"
@@ -43,7 +53,7 @@ const Login = () => { // Changed component name to CustomLogin
               required
             />
           </div>
-          <div className="custom-inputField"> {/* Changed className */}
+          <div className="custom-inputField">
             <input
               type="password"
               placeholder="Password"
@@ -52,10 +62,10 @@ const Login = () => { // Changed component name to CustomLogin
               required
             />
           </div>
-          <button type="submit" className="custom-loginBtn"> {/* Changed className */}
+          <button type="submit" className="custom-loginBtn">
             Login
           </button>
-          <div className="custom-links"> {/* Changed className */}
+          <div className="custom-links">
             <Link to="/signup">Sign up</Link>
             <Link to="/forget_password">Forgot Password?</Link>
           </div>
@@ -64,5 +74,4 @@ const Login = () => { // Changed component name to CustomLogin
     </div>
   );
 };
-
 export default Login;

@@ -39,7 +39,7 @@ const Travel = () => {
   };
 
   if (selectedTransport === "flights") {
-    places = ["New York", "London", "Paris", "Tokyo", "Sydney", "Dubai"];
+    places = ["New York", "London", "Paris", "Tokyo", "Kolkata", "Delhi"];
   } else if (selectedTransport === "trains") {
     places = ["Delhi", "Lucknow", "Pittapuram", "Tahh", "Susi", "hgg"];
   }
@@ -101,7 +101,7 @@ const Travel = () => {
             className={
               selectedTransport === "trains" ? "image selected" : "image"
             }
-            onClick={() => handleTransportSelection("train")}
+            onClick={() => handleTransportSelection("trains")}
           />
           <img
             src="/src/assets/airplane.png"
@@ -109,7 +109,7 @@ const Travel = () => {
             className={
               selectedTransport === "flights" ? "image selected" : "image"
             }
-            onClick={() => handleTransportSelection("airplane")}
+            onClick={() => handleTransportSelection("flights")}
           />
         </div>
       </div>

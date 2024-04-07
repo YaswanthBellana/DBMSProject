@@ -66,6 +66,7 @@ app.get("/", async (request, response) => {
 app.get("/:transport", async (request, response) => {
   const transport = request.params.transport;
   const { from, to } = request.query;
+  console.log("dbirviri");
   if (!from || !to) {
     return response
       .status(400)
@@ -90,19 +91,9 @@ app.get("/:transport", async (request, response) => {
   }
 });
 
-app.get("/lists", async (request, response) => {
-  const query = `SELECT departure, destination FROM trains;`;
-  db.all(query, (error, results) => {
-    if (error) {
-      console.error("Error fetching data:", error);
-      return response.status(500).json({ error: "Internal Server Error" });
-    }
-    response.json(results);
-  });
-});
-
 app.post("/login", async (request, response) => {
   const { name, email, password } = request.body;
+  
   if (!name || !email || !password) {
     return response
       .status(400)
