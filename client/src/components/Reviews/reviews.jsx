@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from "/src/components/Navbar/navbar.jsx";
 import Footer from "/src/components/Footer/footer.jsx";
 import './reviews.css';
@@ -7,7 +7,6 @@ const Review = () => {
     const [selectedPlace, setSelectedPlace] = useState('');
     const [selectedSort, setSelectedSort] = useState('');
     const [reviews, setReviews] = useState([]);
-    const [searchClicked, setSearchClicked] = useState(false);
 
     let places = ['Araku Burra Caves', 'Banaras Ghats', 'Barbotey Rock Garden', 'Basilica of Bom Jesus', 
     'Batuk Bhairav Temple', 'Bishnupur Temples', 'Cabo De Rama Fort', 'Dakshineswar Kali Temple', 'Darjeeling', 
@@ -29,31 +28,22 @@ const Review = () => {
     };
 
     const handleSearchClick = () => {
-        setSearchClicked(true);
+        const apiUrl = 'http://localhost:4000/reviews';
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ selectedPlace, selectedSort })
+        })
+        .then(response => response.json())
+        .then(data => {
+            setReviews(data.reviews);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     };
-
-    useEffect(() => {
-        if (searchClicked) {
-            const apiUrl = 'http://localhost:4000/reviewPlace';
-            console.log("Selected Place:", selectedPlace);
-            console.log("Selected Sort:", selectedSort);
-            fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ selectedPlace, selectedSort })
-            })
-            .then(response => response.json())
-            .then(data => {
-                setReviews(data.reviews);
-                setSearchClicked(false);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
-    }, [searchClicked]);
 
     return (
         <>
@@ -81,8 +71,8 @@ const Review = () => {
                 </div>
             </div>
             <div className='content'>
-                {reviews.map((review, index) => (
-                    <div className="card" key={review.place_id}>
+                {reviews && reviews.map((review, index) => (
+                    <div className="card" key={index}>
                         <div className="top-card">
                             <img src="rejnr" className="img" alt="person" />
                             <div className="homeCardInfo">

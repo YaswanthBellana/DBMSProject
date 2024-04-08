@@ -85,7 +85,7 @@ app.post("/:transport", async (request, response) => {
         return response.status(500).json({ error: "Internal Server Error" });
       }
       response.json(results);
-      console.log(results);
+      console.log(results);    
     });
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -203,36 +203,8 @@ app.post("/fg", async (request, response) => {
   });
 });
 
-app.get("/reviewPlace", async (request, response) => {
-  try {
-    const { selectedPlace, selectedSort } = request.body;
 
-    if (!selectedPlace || !selectedSort) {
-      return response
-        .status(400)
-        .json({ error: "Bad Request: Missing parameters" });
-    }
 
-    const query = `SELECT r.review, r.rating, u.name, p.place_name
-      FROM reviews as r
-      JOIN users as u ON r.user_id = u.user_id
-      JOIN places as p ON r.place_id = p.place_id
-      WHERE p.place_name = ? ORDER BY r.rating ${selectedSort};`;
-
-    db.get(query, [selectedPlace], (err, rows) => {
-      if (err) {
-        console.error("Error executing query:", err);
-        return response.status(500).json({ error: "Internal Server Error" });
-      }
-      console.log("-------------");
-      console.log(rows);
-      response.send({ reviews: rows });
-    });
-  } catch (error) {
-    console.error("Error:", error);
-    response.status(500).json({ error: "Internal Server Error" });
-  }
-});
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
