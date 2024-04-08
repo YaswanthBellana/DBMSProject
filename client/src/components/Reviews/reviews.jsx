@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import Navbar from "/src/components/Navbar/navbar.jsx";
 import Footer from "/src/components/Footer/footer.jsx";
 import './reviews.css';
@@ -8,7 +9,7 @@ const Review = () => {
     const [selectedPlace, setSelectedPlace] = useState('');
     const [selectedSort, setSelectedSort] = useState('DESC');
     const [reviews, setReviews] = useState([]);
-
+    let list_review = []
     let places = ['Araku Burra Caves', 'Banaras Ghats', 'Barbotey Rock Garden', 'Basilica of Bom Jesus', 
     'Batuk Bhairav Temple', 'Bishnupur Temples', 'Cabo De Rama Fort', 'Dakshineswar Kali Temple', 'Darjeeling', 
     'Dasawmedh Ghat', 'Elephantastic', 'Fatehpur Sikri', 'Fort Aguda', 'Goa Beaches', 'Hampi', 'Hazara Rama Temple', 
@@ -41,6 +42,8 @@ const Review = () => {
         .then(response => response.json())
         .then(data => {
             setReviews(data.reviews);
+            list_review.push(data);
+            console.log(list_review)
         })
         .catch(error => {
             console.error('Error:', error);
@@ -66,7 +69,7 @@ const Review = () => {
         <>
             <Navbar />
             <div className='lastButtons'>
-                <button className='reviewButton'>Write review</button>
+                {/*<button className='reviewButton'>Write review</button>*/}
                 <button className='reviewButton' onClick={handleSearchClick}>Search</button>
             </div>
             <div className="reviewContainer">
@@ -99,9 +102,9 @@ const Review = () => {
                                     <h2 className="title">{review.place_name}</h2>
                                 </center>
                                 <p className="bottom-text">{review.review}</p>
-                                <div className=''>
-                                    {/*<StarRating rating={review.rating} />*/}
-                                </div>
+                                {/* <div className=''>
+                                    <StarRating rating={review.rating} />
+                                    </div> */}
                                 <p className="bottom-text" style={{ textAlign: 'right', color: '#b966d4' }}>{review.user_name}</p>
                             </div>
                         </div>
