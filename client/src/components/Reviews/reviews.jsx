@@ -9,7 +9,7 @@ const Review = () => {
     const [selectedPlace, setSelectedPlace] = useState('');
     const [selectedSort, setSelectedSort] = useState('DESC');
     const [reviews, setReviews] = useState([]);
-    let list_review = []
+
     let places = ['Araku Burra Caves', 'Banaras Ghats', 'Barbotey Rock Garden', 'Basilica of Bom Jesus', 
     'Batuk Bhairav Temple', 'Bishnupur Temples', 'Cabo De Rama Fort', 'Dakshineswar Kali Temple', 'Darjeeling', 
     'Dasawmedh Ghat', 'Elephantastic', 'Fatehpur Sikri', 'Fort Aguda', 'Goa Beaches', 'Hampi', 'Hazara Rama Temple', 
@@ -31,7 +31,6 @@ const Review = () => {
 
     const handleSearchClick = () => {
         const apiUrl = 'http://localhost:4000/reviews';
-        const sortValue = selectedSort || 'DESC';
         fetch(apiUrl, {
             method: 'POST',
             headers: {
@@ -41,9 +40,9 @@ const Review = () => {
         })
         .then(response => response.json())
         .then(data => {
-            setReviews(data.reviews);
-            list_review.push(data);
-            console.log(list_review)
+            console.log('Data:', data.rows);
+            setReviews(data.rows);
+            console.log('Reviews:', reviews);
         })
         .catch(error => {
             console.error('Error:', error);
@@ -91,8 +90,8 @@ const Review = () => {
                 </div>
             </div>
             <div className='content'>
-                {reviews && reviews.map((review, index) => (
-                    <div className="card" key={index}>
+                {reviews && reviews.map((review) => (
+                    <div className="card">
                         <div className="top-card">
                             <center>
                             <img src="https://imgs.search.brave.com/LLTcq5kyFMDTd0VICR-bNwu2v5SkSGpzRnNMbAf2BGM/rs:fit:500:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAwLzY1Lzc3LzI3/LzM2MF9GXzY1Nzcy/NzE5X0ExVVY1a0xp/NW5DRVdJMEJOTExp/RmFCUEVrVWJ2NUZ2/LmpwZw" className="reviewimg" alt="person" />
@@ -104,7 +103,7 @@ const Review = () => {
                                 <p className="bottom-text">{review.review}</p>
                                 {/* <div className=''>
                                     <StarRating rating={review.rating} />
-                                    </div> */}
+                                </div> */}
                                 <p className="bottom-text" style={{ textAlign: 'right', color: '#b966d4' }}>{review.user_name}</p>
                             </div>
                         </div>

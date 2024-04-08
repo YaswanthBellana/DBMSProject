@@ -9,7 +9,15 @@ const About = () => {
             <div className="aboutconatiner">
                 <h1 className="aboutheading">The ER diagram</h1>
                 <div className="er-model">
-                    <div className="er-img-div"></div>
+                    <div className="er-img-div">
+                        <img src="/src/assets/ER diagram.jpg" className="poiuytr" />
+                    </div>
+                </div>
+                <h1 className="aboutheading">Tables</h1>
+                <div className="er-model">
+                    <div className="er-img-div">
+                        <img src="/src/assets/Tables used.jpg" className="poiuytr" />
+                    </div>
                 </div>
                 <h1 className="aboutheading">The <i>TEAM</i> members</h1>
                 <div className="memberspics">
