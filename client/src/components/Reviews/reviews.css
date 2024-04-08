@@ -48,3 +48,11 @@
   justify-content: space-around;
   padding-bottom: 20px;
 }
+.reviewimg{
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+}
+.card{
+  min-height: 100px;
+}

@@ -64,35 +64,6 @@ app.get("/", async (request, response) => {
   }
 });
 
-app.post("/:transport", async (request, response) => {
-  const transport = request.params.transport;
-  const { from, to } = request.query;
-  console.log(transport, from, to);
-  if (!from || !to) {
-    return response
-      .status(400)
-      .json({ error: "Both from and to parameters are required" });
-  }
-  if (transport !== "trains" && transport !== "flights") {
-    return response.status(400).json({ error: "Invalid transport mode" });
-  }
-
-  try {
-    const query = `SELECT * FROM ${transport} WHERE departure = ? AND destination = ?`;
-    db.all(query, [from, to], (error, results) => {
-      if (error) {
-        console.error("Error fetching data:", error);
-        return response.status(500).json({ error: "Internal Server Error" });
-      }
-      response.json(results);
-      console.log(results);    
-    });
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    response.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
 app.post("/login", async (request, response) => {
   const { name, email, password } = request.body;
 
@@ -203,7 +174,59 @@ app.post("/fg", async (request, response) => {
   });
 });
 
+app.post('/reviews', async (req, res) => {
+  try {
+    const { selectedPlace, selectedSort } = req.body;
+    console.log(selectedPlace);
+    console.log(selectedSort);
+    const query = `
+      SELECT r.review, r.rating, u.name AS user_name, p.place_name
+      FROM reviews r
+      JOIN users u ON r.user_id = u.user_id
+      JOIN places p ON r.place_id = p.place_id
+      WHERE p.place_name = ?
+      ORDER BY r.rating ${selectedSort};`;
+    db.all(query, [selectedPlace], (err, rows) => {
+      if (err) {
+        console.error('Error executing query:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+      res.send({ rows });
+      console.log(rows)
+    });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
+app.post("/:transport", async (request, response) => {
+  const transport = request.params.transport;
+  const { from, to } = request.query;
+  console.log(transport, from, to);
+  if (!from || !to) {
+    return response
+      .status(400)
+      .json({ error: "Both from and to parameters are required" });
+  }
+  if (transport !== "trains" && transport !== "flights") {
+    return response.status(400).json({ error: "Invalid transport mode" });
+  }
+  try {
+    const query = `SELECT * FROM ${transport} WHERE departure = ? AND destination = ?`;
+    db.all(query, [from, to], (error, results) => {
+      if (error) {
+        console.error("Error fetching data:", error);
+        return response.status(500).json({ error: "Internal Server Error" });
+      }
+      response.json(results);
+      console.log(results);    
+    });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    response.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 
 app.listen(port, () => {
